@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, maximum-scale=0.9, user-scalable=0" />
+    <link rel="stylesheet" href="./src/styles/style.css" />
+    <title>Data Creator</title>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Data Creator</h1>
+      <div>
+        <input type="text" id="playerName" placeholder="Type your name" />
+        <span id="instructions"></span>
+        <button id="advanceBtn" onClick="start()">Start</button>
+      </div>
+      <br />
+      <div id="sketchPadContainer" style="visibility: hidden"></div>
+    </div>
+
+    <script src="./src/draw.js"></script>
+    <script src="./src/sketchPad.js"></script>
+    <script src="./src/main.js"></script>
+  </body>
+</html>
