@@ -3,24 +3,40 @@ canvas.height = 600;
 
 const ctx = canvas.getContext("2d");
 
-const p1 = new Point(200, 200);
-const p2 = new Point(500, 200);
-const p3 = new Point(400, 400);
-const p4 = new Point(100, 300);
+const graphStorage = localStorage.getItem("graph");
+const graphData = graphStorage ? JSON.parse(graphStorage) : null;
 
-const s1 = new Segment(p1, p2);
-const s2 = new Segment(p1, p3);
-const s3 = new Segment(p1, p4);
-const s4 = new Segment(p2, p3);
-
-const graph = new Graph([p1, p2, p3, p4], [s1, s2, s3, s4]);
-
-const graphEditor = new GraphEditor(canvas, graph);
+const graph = graphData ? Graph.load(graphData) : new Graph();
+const viewPort = new Viewport(canvas);
+const graphEditor = new GraphEditor(viewPort, graph);
 
 animate();
 
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  viewPort.reset();
   graphEditor.display();
   requestAnimationFrame(animate);
+}
+
+function dispose() {
+  graphEditor.dispose();
+}
+
+function disposeLocalStorage() {
+  localStorage.clear();
+}
+
+function save() {
+  localStorage.setItem("graph", JSON.stringify(graph));
+}
+
+function saveJSON() {
+  const a = document.createElement("a");
+  const data = JSON.stringify(graph, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  a.href = URL.createObjectURL(blob);
+  a.setAttribute("download", "graph.json");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }

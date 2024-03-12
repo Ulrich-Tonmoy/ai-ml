@@ -10,9 +10,15 @@
     <h1>World Editor</h1>
     <canvas id="canvas"></canvas>
 
-    <div id="controls"></div>
+    <div id="controls">
+      <button onclick="dispose()" title="Clear Canvas">🧹</button>
+      <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🚫</button>
+      <button onclick="save()" title="Save to LocalStorage">💾</button>
+      <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
+    </div>
 
     <script src="js/editor/graphEditor.js"></script>
+    <script src="js/editor/viewport.js"></script>
     <script src="js/math/utils.js"></script>
     <script src="js/math/graph.js"></script>
     <script src="js/primitives/point.js"></script>
