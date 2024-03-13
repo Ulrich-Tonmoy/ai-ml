@@ -7,6 +7,8 @@ const graphStorage = localStorage.getItem("graph");
 const graphData = graphStorage ? JSON.parse(graphStorage) : null;
 
 const graph = graphData ? Graph.load(graphData) : new Graph();
+const world = new World(graph);
+
 const viewPort = new Viewport(canvas);
 const graphEditor = new GraphEditor(viewPort, graph);
 
@@ -14,10 +16,14 @@ animate();
 
 function animate() {
   viewPort.reset();
+  world.generate();
+  world.draw(ctx);
+  ctx.globalAlpha = 0.3;
   graphEditor.display();
   requestAnimationFrame(animate);
 }
 
+/* --------------------------------- Controls --------------------------------- */
 function dispose() {
   graphEditor.dispose();
 }
