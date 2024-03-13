@@ -2,7 +2,7 @@ class Polygon {
   constructor(points) {
     this.points = points;
     this.segments = [];
-    for (let i = 1; i <= this.points.length; i++) {
+    for (let i = 1; i <= points.length; i++) {
       this.segments.push(new Segment(points[i - 1], points[i % points.length]));
     }
   }
@@ -10,7 +10,7 @@ class Polygon {
   static union(polys) {
     Polygon.multiBreak(polys);
     const keptSegments = [];
-    for (let i = 0; i < polys.length - 1; i++) {
+    for (let i = 0; i < polys.length; i++) {
       for (const seg of polys[i].segments) {
         let keep = true;
         for (let j = 0; j < polys.length; j++) {
@@ -51,18 +51,17 @@ class Polygon {
           let og = seg1[i].p2;
           seg1[i].p2 = point;
           seg1.splice(i + 1, 0, new Segment(point, og));
-
           og = seg2[j].p2;
           seg2[j].p2 = point;
-          seg1.splice(j + 1, 0, new Segment(point, og));
+          seg2.splice(j + 1, 0, new Segment(point, og));
         }
       }
     }
   }
 
   containsSegment(seg) {
-    const midPoint = average(seg.p1, seg.p2);
-    return this.containsPoint(midPoint);
+    const midpoint = average(seg.p1, seg.p2);
+    return this.containsPoint(midpoint);
   }
 
   containsPoint(point) {

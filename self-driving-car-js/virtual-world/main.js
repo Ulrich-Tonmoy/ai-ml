@@ -9,13 +9,13 @@ const graphData = graphStorage ? JSON.parse(graphStorage) : null;
 const graph = graphData ? Graph.load(graphData) : new Graph();
 const world = new World(graph);
 
-const viewPort = new Viewport(canvas);
-const graphEditor = new GraphEditor(viewPort, graph);
+const viewport = new Viewport(canvas);
+const graphEditor = new GraphEditor(viewport, graph);
 
 animate();
 
 function animate() {
-  viewPort.reset();
+  viewport.reset();
   world.generate();
   world.draw(ctx);
   ctx.globalAlpha = 0.3;
