@@ -1,4 +1,4 @@
-canvas.width = 600;
+canvas.width = 1000;
 canvas.height = 600;
 
 let showEditor = true;
@@ -24,7 +24,8 @@ function animate() {
     world.generate();
     oldGraphHash = graph.hash();
   }
-  world.draw(ctx);
+  const viewPoint = scale(viewport.getOffset(), -1);
+  world.draw(ctx, viewPoint);
   // ctx.globalAlpha = 0.3;
   showEditor && graphEditor.display();
   requestAnimationFrame(animate);
