@@ -1,6 +1,8 @@
 canvas.width = 600;
 canvas.height = 600;
 
+let showEditor = true;
+
 const ctx = canvas.getContext("2d");
 
 const graphStorage = localStorage.getItem("graph");
@@ -12,14 +14,19 @@ const world = new World(graph);
 const viewport = new Viewport(canvas);
 const graphEditor = new GraphEditor(viewport, graph);
 
+let oldGraphHash = graph.hash();
+
 animate();
 
 function animate() {
   viewport.reset();
-  world.generate();
+  if (graph.hash() !== oldGraphHash) {
+    world.generate();
+    oldGraphHash = graph.hash();
+  }
   world.draw(ctx);
-  ctx.globalAlpha = 0.3;
-  graphEditor.display();
+  // ctx.globalAlpha = 0.3;
+  showEditor && graphEditor.display();
   requestAnimationFrame(animate);
 }
 
@@ -45,4 +52,8 @@ function saveJSON() {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+}
+
+function toggleEditor() {
+  showEditor = !showEditor;
 }
