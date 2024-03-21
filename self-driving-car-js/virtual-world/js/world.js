@@ -30,7 +30,7 @@ class World {
       this.envelopes.push(new Envelope(seg, this.roadWidth, this.borderRadius));
     }
 
-    this.roadBorders = Polygon.union(this.envelopes.map((env) => env.poly));
+    this.roadBorders = Polygon.union(this.envelopes.map((e) => e.poly));
     this.buildings = this.#generateBuildings();
     this.trees = this.#generateTrees();
   }
@@ -47,7 +47,7 @@ class World {
       );
     }
 
-    const guides = Polygon.union(tempEnvelopes.map((t) => t.poly));
+    const guides = Polygon.union(tempEnvelopes.map((e) => e.poly));
 
     for (let i = 0; i < guides.length; i++) {
       const seg = guides[i];
@@ -159,7 +159,7 @@ class World {
 
   draw(ctx, viewPoint) {
     for (const env of this.envelopes) {
-      env.draw(ctx, { fill: "#bbb", stroke: "#bbb", lineWidth: 15 });
+      env.draw(ctx, { fill: "#BBB", stroke: "#BBB", lineWidth: 15 });
     }
 
     for (const seg of this.graph.segments) {

@@ -1,8 +1,8 @@
 class Tree {
-  constructor(center, size, heightCoefficient = 0.3) {
+  constructor(center, size, height = 200) {
     this.center = center;
     this.size = size;
-    this.heightCoefficient = heightCoefficient;
+    this.height = height;
     this.base = this.#generateLevel(center, size);
   }
 
@@ -11,16 +11,15 @@ class Tree {
     const rad = size / 2;
     for (let a = 0; a < Math.PI * 2; a += Math.PI / 16) {
       const seededRandom = Math.cos(((a + this.center.x) * size) % 17) ** 2;
-      const noiseRad = rad * lerp(0.5, 1, seededRandom);
-      points.push(translate(point, a, noiseRad));
+      const noisyRadius = rad * lerp(0.5, 1, seededRandom);
+      points.push(translate(point, a, noisyRadius));
     }
 
     return new Polygon(points);
   }
 
   draw(ctx, viewPoint) {
-    const diff = subtract(this.center, viewPoint);
-    const top = add(this.center, scale(diff, this.heightCoefficient));
+    const top = getFake3dPoint(this.center, viewPoint, this.height);
 
     const levelCount = 7;
     for (let level = 0; level < levelCount; level++) {
@@ -29,7 +28,7 @@ class Tree {
       const color = `rgb(30, ${lerp(50, 200, t)}, 70`;
       const size = lerp(this.size, 40, t);
       const poly = this.#generateLevel(point, size);
-      poly.draw(ctx, { fill: color, stroke: "rgba(0,0,0,0.0)" });
+      poly.draw(ctx, { fill: color, stroke: "rgba(0,0,0,0)" });
     }
   }
 }
