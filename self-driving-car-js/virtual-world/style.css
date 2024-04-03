@@ -29,6 +29,11 @@ button {
   background-clip: padding-box, border-box;
 }
 
+.disabled {
+  background: gray;
+  filter: grayscale(100%);
+}
+
 button:hover {
   transition: all 0.3s ease;
   box-shadow: rgba(111, 76, 255, 0.5) 0px 0px 20px 0px;

@@ -15,12 +15,35 @@
       <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🚫</button>
       <button onclick="save()" title="Save to LocalStorage">💾</button>
       <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
-      <button onclick="toggleEditor()" title="Toggle Editor">🗺️</button>
+      <button id="graphBtn" onclick="setEditor('graph')" title="Enable Graph Editor">
+        🗺️
+      </button>
+      <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
+        🛑
+      </button>
+      <button
+        id="crossingBtn"
+        onclick="setEditor('crossing')"
+        title="Enable Crossing Editor"
+      >
+        🚸
+      </button>
+      <button id="startBtn" onclick="setEditor('start')" title="Enable Start Editor">
+        🚗
+      </button>
     </div>
 
     <script src="js/world.js"></script>
-    <script src="js/editor/graphEditor.js"></script>
-    <script src="js/editor/viewport.js"></script>
+    <script src="js/markings/marking.js"></script>
+    <script src="js/markings/stop.js"></script>
+    <script src="js/markings/start.js"></script>
+    <script src="js/markings/crossing.js"></script>
+    <script src="js/editors/viewport.js"></script>
+    <script src="js/editors/markingEditor.js"></script>
+    <script src="js/editors/graphEditor.js"></script>
+    <script src="js/editors/stopEditor.js"></script>
+    <script src="js/editors/startEditor.js"></script>
+    <script src="js/editors/crossingEditor.js"></script>
     <script src="js/objects/tree.js"></script>
     <script src="js/objects/building.js"></script>
     <script src="js/math/utils.js"></script>

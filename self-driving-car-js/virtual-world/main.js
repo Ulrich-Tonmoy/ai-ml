@@ -1,8 +1,6 @@
 canvas.width = 1000;
 canvas.height = 600;
 
-let showEditor = true;
-
 const ctx = canvas.getContext("2d");
 
 const graphStorage = localStorage.getItem("graph");
@@ -12,10 +10,16 @@ const graph = graphData ? Graph.load(graphData) : new Graph();
 const world = new World(graph);
 
 const viewport = new Viewport(canvas);
-const graphEditor = new GraphEditor(viewport, graph);
+const tools = {
+  graph: { button: graphBtn, editor: new GraphEditor(viewport, graph) },
+  stop: { button: stopBtn, editor: new StopEditor(viewport, world) },
+  crossing: { button: crossingBtn, editor: new CrossingEditor(viewport, world) },
+  start: { button: startBtn, editor: new StartEditor(viewport, world) },
+};
 
 let oldGraphHash = graph.hash();
 
+setEditor("graph");
 animate();
 
 function animate() {
@@ -26,14 +30,17 @@ function animate() {
   }
   const viewPoint = scale(viewport.getOffset(), -1);
   world.draw(ctx, viewPoint);
-  // ctx.globalAlpha = 0.3;
-  showEditor && graphEditor.display();
+  ctx.globalAlpha = 0.3;
+  for (const tool of Object.values(tools)) {
+    tool.editor.display();
+  }
   requestAnimationFrame(animate);
 }
 
 /* --------------------------------- Controls --------------------------------- */
 function dispose() {
-  graphEditor.dispose();
+  tools["graph"].editor.dispose();
+  world.markings.length = 0;
 }
 
 function disposeLocalStorage() {
@@ -55,6 +62,12 @@ function saveJSON() {
   document.body.removeChild(a);
 }
 
-function toggleEditor() {
-  showEditor = !showEditor;
+function setEditor(mode) {
+  for (const tool of Object.values(tools)) {
+    tool.editor.disable();
+    tool.button.classList.add("disabled");
+  }
+
+  tools[mode].editor.enable();
+  tools[mode].button.classList.remove("disabled");
 }
