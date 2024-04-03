@@ -68,7 +68,6 @@ class MarkingEditor {
     );
 
     if (seg) {
-      this.intent = seg;
       const proj = seg.projectPoint(this.mouse);
       if (proj.offset >= 0 && proj.offset <= 1) {
         this.intent = this.createMarking(proj.point, seg.directionVector());

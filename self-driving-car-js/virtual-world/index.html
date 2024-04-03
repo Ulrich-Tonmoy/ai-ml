@@ -21,6 +21,9 @@
       <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
         🛑
       </button>
+      <button id="yieldBtn" onclick="setEditor('yield')" title="Enable Yield Editor">
+        ⚠️
+      </button>
       <button
         id="crossingBtn"
         onclick="setEditor('crossing')"
@@ -28,9 +31,20 @@
       >
         🚸
       </button>
+      <button
+        id="parkingBtn"
+        onclick="setEditor('parking')"
+        title="Enable Parking Editor"
+      >
+        🅿️
+      </button>
+      <button id="lightBtn" onclick="setEditor('light')" title="Enable Light Editor">
+        🚦
+      </button>
       <button id="startBtn" onclick="setEditor('start')" title="Enable Start Editor">
         🚗
       </button>
+      <button id="targetBtn" onclick="setEditor('target')">🎯</button>
     </div>
 
     <script src="js/world.js"></script>
@@ -38,12 +52,20 @@
     <script src="js/markings/stop.js"></script>
     <script src="js/markings/start.js"></script>
     <script src="js/markings/crossing.js"></script>
+    <script src="js/markings/parking.js"></script>
+    <script src="js/markings/light.js"></script>
+    <script src="js/markings/target.js"></script>
+    <script src="js/markings/yield.js"></script>
     <script src="js/editors/viewport.js"></script>
     <script src="js/editors/markingEditor.js"></script>
     <script src="js/editors/graphEditor.js"></script>
     <script src="js/editors/stopEditor.js"></script>
     <script src="js/editors/startEditor.js"></script>
     <script src="js/editors/crossingEditor.js"></script>
+    <script src="js/editors/parkingEditor.js"></script>
+    <script src="js/editors/lightEditor.js"></script>
+    <script src="js/editors/targetEditor.js"></script>
+    <script src="js/editors/yieldEditor.js"></script>
     <script src="js/objects/tree.js"></script>
     <script src="js/objects/building.js"></script>
     <script src="js/math/utils.js"></script>

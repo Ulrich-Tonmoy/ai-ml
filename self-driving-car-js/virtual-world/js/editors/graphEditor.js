@@ -15,8 +15,6 @@ class GraphEditor {
     this.handleMouseMove = (e) => this.#handleMouseMove(e);
     this.handleMouseUp = () => (this.dragging = false);
     this.handleContextMenu = (e) => e.preventDefault();
-
-    this.#addEventListeners();
   }
 
   enable() {
