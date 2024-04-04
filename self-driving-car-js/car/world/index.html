@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>World Editor</title>
+  </head>
+  <body>
+    <h2>World Editor</h2>
+    <canvas id="canvas"></canvas>
+
+    <div id="controls">
+      <button onclick="dispose()" title="Clear Canvas">🧹</button>
+      <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🚫</button>
+      <button onclick="save()" title="Save to LocalStorage">💾</button>
+      <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
+      <label title="Load JSON File">
+        📁 <input type="file" accept=".json" onchange="load(event)" />
+      </label>
+      <button id="graphBtn" onclick="setEditor('graph')" title="Enable Graph Editor">
+        🗺️
+      </button>
+      <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
+        🛑
+      </button>
+      <button id="yieldBtn" onclick="setEditor('yield')" title="Enable Yield Editor">
+        ⚠️
+      </button>
+      <button
+        id="crossingBtn"
+        onclick="setEditor('crossing')"
+        title="Enable Crossing Editor"
+      >
+        🚸
+      </button>
+      <button
+        id="parkingBtn"
+        onclick="setEditor('parking')"
+        title="Enable Parking Editor"
+      >
+        🅿️
+      </button>
+      <button id="lightBtn" onclick="setEditor('light')" title="Enable Light Editor">
+        🚦
+      </button>
+      <button id="startBtn" onclick="setEditor('start')" title="Enable Start Editor">
+        🚗
+      </button>
+      <button id="targetBtn" onclick="setEditor('target')">🎯</button>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
