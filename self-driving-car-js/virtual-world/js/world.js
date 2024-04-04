@@ -28,6 +28,27 @@ class World {
     this.generate();
   }
 
+  static load(data) {
+    const world = new World(new Graph());
+    world.graph = Graph.load(data.graph);
+    world.roadWidth = data.roadWidth;
+    world.borderRadius = data.borderRadius;
+    world.buildingWidth = data.buildingWidth;
+    world.buildingMinLength = data.buildingMinLength;
+    world.spacing = data.spacing;
+    world.treeSize = data.treeSize;
+    world.envelopes = data.envelopes.map((e) => Envelope.load(e));
+    world.roadBorders = data.roadBorders.map((r) => new Segment(r.p1, r.p2));
+    world.buildings = data.buildings.map((b) => Building.load(b));
+    world.trees = data.trees.map((t) => new Tree(t.center, data.treeSize));
+    world.laneGuides = data.laneGuides.map((g) => new Segment(g.p1, g.p2));
+    world.markings = data.markings.map((m) => Marking.load(m));
+    world.zoom = data.zoom;
+    world.offset = data.offset;
+
+    return world;
+  }
+
   generate() {
     this.envelopes.length = 0;
     for (const seg of this.graph.segments) {

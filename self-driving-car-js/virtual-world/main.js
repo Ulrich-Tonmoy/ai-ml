@@ -3,13 +3,12 @@ canvas.height = 600;
 
 const ctx = canvas.getContext("2d");
 
-const graphStorage = localStorage.getItem("graph");
-const graphData = graphStorage ? JSON.parse(graphStorage) : null;
+const worldStorage = localStorage.getItem("world");
+const worldData = worldStorage ? JSON.parse(worldStorage) : null;
+let world = worldData ? World.load(worldData) : new World(new Graph());
+const graph = world.graph;
 
-const graph = graphData ? Graph.load(graphData) : new Graph();
-const world = new World(graph);
-
-const viewport = new Viewport(canvas);
+const viewport = new Viewport(canvas, world.zoom, world.offset);
 const tools = {
   graph: { button: graphBtn, editor: new GraphEditor(viewport, graph) },
   stop: { button: stopBtn, editor: new StopEditor(viewport, world) },
@@ -52,18 +51,42 @@ function disposeLocalStorage() {
 }
 
 function save() {
-  localStorage.setItem("graph", JSON.stringify(graph));
+  world.zoom = viewport.zoom;
+  world.offset = viewport.offset;
+  localStorage.setItem("world", JSON.stringify(world));
 }
 
 function saveJSON() {
+  world.zoom = viewport.zoom;
+  world.offset = viewport.offset;
+
   const a = document.createElement("a");
-  const data = JSON.stringify(graph, null, 2);
+  const data = JSON.stringify(world, null, 2);
   const blob = new Blob([data], { type: "application/json" });
   a.href = URL.createObjectURL(blob);
-  a.setAttribute("download", "graph.json");
+  a.setAttribute("download", "world.json");
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+}
+
+function load(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    alert("No file selected");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.readAsText(file);
+
+  reader.onload = (e) => {
+    const content = e.target.result;
+    const data = JSON.parse(content);
+    world = World.load(data);
+    localStorage.setItem("world", JSON.stringify(world));
+    location.reload();
+  };
 }
 
 function setEditor(mode) {

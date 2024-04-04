@@ -4,6 +4,7 @@ class Start extends Marking {
 
     this.img = new Image();
     this.img.src = "./assets/car.png";
+    this.type = "start";
   }
 
   draw(ctx) {

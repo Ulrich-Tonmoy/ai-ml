@@ -12,6 +12,11 @@ h2 {
   background-color: #2a5;
 }
 
+input {
+  display: none;
+}
+
+label,
 button {
   font-size: 18px;
   padding: 2px 8px;

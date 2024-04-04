@@ -15,6 +15,9 @@
       <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🚫</button>
       <button onclick="save()" title="Save to LocalStorage">💾</button>
       <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
+      <label title="Load JSON File">
+        📁 <input type="file" accept=".json" onchange="load(event)" />
+      </label>
       <button id="graphBtn" onclick="setEditor('graph')" title="Enable Graph Editor">
         🗺️
       </button>
