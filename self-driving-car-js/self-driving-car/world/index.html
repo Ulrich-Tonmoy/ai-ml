@@ -12,13 +12,13 @@
 
     <div id="controls">
       <button onclick="dispose()" title="Clear Canvas">🧹</button>
-      <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🚫</button>
+      <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🗑️</button>
       <button onclick="save()" title="Save to LocalStorage">💾</button>
       <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
       <label title="Load JSON File">
         📁 <input type="file" accept=".json" onchange="load(event)" />
       </label>
-      <button id="graphBtn" onclick="setEditor('graph')" title="Enable Graph Editor">
+      <button id="graphBtn" onclick="setEditor('graph')" title="Enable Map Editor">
         🗺️
       </button>
       <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
@@ -50,6 +50,33 @@
       <button id="targetBtn" onclick="setEditor('target')">🎯</button>
     </div>
 
+    <script src="js/world.js"></script>
+    <script src="js/markings/marking.js"></script>
+    <script src="js/markings/stop.js"></script>
+    <script src="js/markings/start.js"></script>
+    <script src="js/markings/crossing.js"></script>
+    <script src="js/markings/parking.js"></script>
+    <script src="js/markings/light.js"></script>
+    <script src="js/markings/target.js"></script>
+    <script src="js/markings/yield.js"></script>
+    <script src="js/editors/viewport.js"></script>
+    <script src="js/editors/markingEditor.js"></script>
+    <script src="js/editors/graphEditor.js"></script>
+    <script src="js/editors/stopEditor.js"></script>
+    <script src="js/editors/startEditor.js"></script>
+    <script src="js/editors/crossingEditor.js"></script>
+    <script src="js/editors/parkingEditor.js"></script>
+    <script src="js/editors/lightEditor.js"></script>
+    <script src="js/editors/targetEditor.js"></script>
+    <script src="js/editors/yieldEditor.js"></script>
+    <script src="js/objects/tree.js"></script>
+    <script src="js/objects/building.js"></script>
+    <script src="js/math/utils.js"></script>
+    <script src="js/math/graph.js"></script>
+    <script src="js/primitives/point.js"></script>
+    <script src="js/primitives/segment.js"></script>
+    <script src="js/primitives/polygon.js"></script>
+    <script src="js/primitives/envelope.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

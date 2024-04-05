@@ -9,7 +9,7 @@ const networkCTX = networkCanvas.getContext("2d");
 
 const worldStorage = localStorage.getItem("world");
 const worldData = worldStorage ? JSON.parse(worldStorage) : null;
-const world = worldData ? World.load(worldData) : new World(new Graph());
+let world = worldData ? World.load(worldData) : new World(new Graph());
 const viewport = new Viewport(carCanvas, world.zoom, world.offset);
 
 const aiCarNumbers = 150;
@@ -69,6 +69,54 @@ function generateCars(N) {
 
 function saveBestBrain() {
   localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+}
+
+function saveBestBrainJSON() {
+  const a = document.createElement("a");
+  const data = JSON.stringify(bestCar.brain, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  a.href = URL.createObjectURL(blob);
+  a.setAttribute("download", "brain.json");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function loadBrain(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    alert("No file selected");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.readAsText(file);
+
+  reader.onload = (e) => {
+    const content = e.target.result;
+    const brain = JSON.parse(content);
+    localStorage.setItem("bestBrain", JSON.stringify(brain));
+    location.reload();
+  };
+}
+
+function loadWorld(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    alert("No file selected");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.readAsText(file);
+
+  reader.onload = (e) => {
+    const content = e.target.result;
+    const data = JSON.parse(content);
+    world = World.load(data);
+    localStorage.setItem("world", JSON.stringify(world));
+    location.reload();
+  };
 }
 
 function discardBestBrain() {

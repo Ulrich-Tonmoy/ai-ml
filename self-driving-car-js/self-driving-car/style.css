@@ -17,6 +17,12 @@ body {
   flex-direction: column;
 }
 
+input {
+  display: none;
+}
+
+label,
+a,
 button {
   font-size: 18px;
   padding: 2px 2px;
