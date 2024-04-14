@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>World Editor</title>
+  </head>
+  <body>
+    <h2>World Editor</h2>
+    <canvas id="canvas"></canvas>
+
+    <div id="controls">
+      <button onclick="toggleInfo(true)" title="Info">ℹ️</button>
+      <button onclick="dispose()" title="Clear Canvas">🧹</button>
+      <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🗑️</button>
+      <button onclick="save()" title="Save to LocalStorage">💾</button>
+      <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
+      <label title="Load JSON File">
+        📁 <input type="file" accept=".world" onchange="load(event)" />
+      </label>
+      <button onclick="openOsmPanel()" title="OSM JSON Data">🗺️</button>
+      <button
+        id="generateBtn"
+        onclick="setEditor('generate')"
+        title="Enable World Generation"
+      >
+        ⚒️
+      </button>
+      <button id="graphBtn" onclick="setEditor('graph')" title="Enable Map Editor">
+        🌐
+      </button>
+      <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
+        🛑
+      </button>
+      <button id="yieldBtn" onclick="setEditor('yield')" title="Enable Yield Editor">
+        ⚠️
+      </button>
+      <button
+        id="crossingBtn"
+        onclick="setEditor('crossing')"
+        title="Enable Crossing Editor"
+      >
+        🚸
+      </button>
+      <button
+        id="parkingBtn"
+        onclick="setEditor('parking')"
+        title="Enable Parking Editor"
+      >
+        🅿️
+      </button>
+      <button id="lightBtn" onclick="setEditor('light')" title="Enable Traffic Editor">
+        🚦
+      </button>
+      <button id="startBtn" onclick="setEditor('start')" title="Enable Start Editor">
+        🚗
+      </button>
+      <button id="targetBtn" onclick="setEditor('target')" title="Enable Target Editor">
+        🎯
+      </button>
+
+      <div id="osmPanel">
+        <div>
+          <textarea
+            id="osmDataContainer"
+            cols="50"
+            rows="10"
+            placeholder="Paste OSM Data"
+          ></textarea>
+          <div>
+            <button onclick="parseOsmData()">✔️</button>
+            <button onclick="closeOsmPanel()">❌</button>
+          </div>
+        </div>
+      </div>
+      <div id="infoPanel">
+        <div>
+          <button onclick="toggleInfo()">❌</button>
+          <ul>
+            <li>🧹 - Clear the canvas</li>
+            <li>🗑️ - Clear LocalStorage Data</li>
+            <li>💾 - Save Generated World Data in LocalStorage</li>
+            <li>🗃️ - Save Generated World Data in a JSON file</li>
+            <li>📁 - Load World Data from a JSON file</li>
+            <li>
+              🗺️ - Open a Textarea to paste Map JSON data. Goto
+              <a target="_blank" href="https://overpass-turbo.eu/">
+                https://overpass-turbo.eu/</a
+              >
+              then zoom into an area you want copy and try to zoom as much as possible as
+              you would want to select a small area else the generated map will be very
+              large. After zooming in paste
+              <span onclick="copyToClipboard()">copy to clipboard</span> this in the
+              editor and run and then toggle the Data view copy and paste it in the
+              textarea.
+            </li>
+            <li>
+              ⚒️ - Toggle World Generation as when the world is big and you are editing
+              and
+            </li>
+            <li>generating it will slow down the whole process</li>
+            <li>🌐 - Enable the Point editor to add and connect point to make road</li>
+            <li>🛑 - Enable Stop editor to add Stop marking</li>
+            <li>⚠️ - Enable Yield editor to add Yield marking</li>
+            <li>🚸 - Enable Crossing editor to add Crossing marking</li>
+            <li>🅿️ - Enable Parking editor to add Parking marking</li>
+            <li>🚦 - Enable Traffic editor to add Traffic marking</li>
+            <li>🚗 - Enable Start editor to add ai Start position marking</li>
+            <li>🎯 - Enable Target editor to add Target marking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/world.js"></script>
+    <script src="js/markings/marking.js"></script>
+    <script src="js/markings/stop.js"></script>
+    <script src="js/markings/start.js"></script>
+    <script src="js/markings/crossing.js"></script>
+    <script src="js/markings/parking.js"></script>
+    <script src="js/markings/light.js"></script>
+    <script src="js/markings/target.js"></script>
+    <script src="js/markings/yield.js"></script>
+    <script src="js/viewport.js"></script>
+    <script src="js/editors/markingEditor.js"></script>
+    <script src="js/editors/graphEditor.js"></script>
+    <script src="js/editors/stopEditor.js"></script>
+    <script src="js/editors/startEditor.js"></script>
+    <script src="js/editors/crossingEditor.js"></script>
+    <script src="js/editors/parkingEditor.js"></script>
+    <script src="js/editors/lightEditor.js"></script>
+    <script src="js/editors/targetEditor.js"></script>
+    <script src="js/editors/yieldEditor.js"></script>
+    <script src="js/objects/tree.js"></script>
+    <script src="js/objects/building.js"></script>
+    <script src="js/math/utils.js"></script>
+    <script src="js/math/graph.js"></script>
+    <script src="js/math/osm.js"></script>
+    <script src="js/primitives/point.js"></script>
+    <script src="js/primitives/segment.js"></script>
+    <script src="js/primitives/polygon.js"></script>
+    <script src="js/primitives/envelope.js"></script>
+    <script src="js/lz-string.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
