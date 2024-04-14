@@ -9,7 +9,7 @@ networkCanvas.height = window.innerHeight - 300;
 const carCTX = carCanvas.getContext("2d");
 const networkCTX = networkCanvas.getContext("2d");
 
-const worldStorage = localStorage.getItem("world");
+const worldStorage = LZString.decompress(localStorage.getItem("world"));
 const worldData = worldStorage ? JSON.parse(worldStorage) : null;
 let world = worldData ? World.load(worldData) : new World(new Graph());
 const viewport = new Viewport(carCanvas, world.zoom, world.offset);
@@ -81,7 +81,7 @@ function saveBestBrainJSON() {
   const data = JSON.stringify(bestCar.brain, null, 2);
   const blob = new Blob([data], { type: "application/json" });
   a.href = URL.createObjectURL(blob);
-  a.setAttribute("download", "brain.json");
+  a.setAttribute("download", "brain.brain");
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -119,7 +119,7 @@ function loadWorld(event) {
     const content = e.target.result;
     const data = JSON.parse(content);
     world = World.load(data);
-    localStorage.setItem("world", JSON.stringify(world));
+    localStorage.setItem("world", LZString.compress(JSON.stringify(world)));
     location.reload();
   };
 }
@@ -138,4 +138,9 @@ function getBestBrain() {
       }
     }
   }
+}
+
+function toggleInfo(enable = false) {
+  if (enable) infoPanel.style.display = "block";
+  else infoPanel.style.display = "none";
 }

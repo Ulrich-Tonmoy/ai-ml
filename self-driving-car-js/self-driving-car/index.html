@@ -10,16 +10,34 @@
   <body>
     <canvas id="carCanvas"></canvas>
     <div id="verticalButtons">
+      <button onclick="toggleInfo(true)" title="Info">ℹ️</button>
       <button title="Save Brain" onclick="saveBestBrain()">💾</button>
       <button title="Save Brain JSON" onclick="saveBestBrainJSON()">🗃️</button>
       <button title="Delete Brain" onclick="discardBestBrain()">🗑️</button>
       <label title="Load Brain">
-        🧠 <input type="file" accept=".json" onchange="loadBrain(event)" />
+        🧠 <input type="file" accept=".brain" onchange="loadBrain(event)" />
       </label>
       <label title="Load World">
-        🌐 <input type="file" accept=".json" onchange="loadWorld(event)" />
+        🌐 <input type="file" accept=".world" onchange="loadWorld(event)" />
       </label>
       <a title="World Generator/Editor" href="./world/index.html">🗺️</a>
+    </div>
+    <div id="infoPanel">
+      <div>
+        <button onclick="toggleInfo()">❌</button>
+        <ul>
+          <li>
+            First you need to go to world editor clicking on 🗺️ and generate a world and
+            save to JSON then load the world here by clicking on 🌐
+          </li>
+          <li>💾 - Save Brain Data in LocalStorage</li>
+          <li>🗃️ - Save Brain Data in a JSON file</li>
+          <li>🗑️ - Clear LocalStorage Data</li>
+          <li>🧠 - Load Brain Data from a JSON file</li>
+          <li>🌐 - Load World Data from a JSON file</li>
+          <li>🗺️ - Redirect to World Editor to generate the world</li>
+        </ul>
+      </div>
     </div>
     <div>
       <canvas id="networkCanvas"></canvas>
@@ -53,6 +71,8 @@
     <script src="./world/js/primitives/segment.js"></script>
     <script src="./world/js/primitives/polygon.js"></script>
     <script src="./world/js/primitives/envelope.js"></script>
+
+    <script src="./world/js/lz-string.min.js"></script>
 
     <script src="./js/miniMap.js"></script>
     <script src="./js/visualizer.js"></script>

@@ -11,14 +11,22 @@
     <canvas id="canvas"></canvas>
 
     <div id="controls">
+      <button onclick="toggleInfo(true)" title="Info">ℹ️</button>
       <button onclick="dispose()" title="Clear Canvas">🧹</button>
       <button onclick="disposeLocalStorage()" title="Clear LocalStorage">🗑️</button>
       <button onclick="save()" title="Save to LocalStorage">💾</button>
       <button onclick="saveJSON()" title="Save as JSON">🗃️</button>
       <label title="Load JSON File">
-        📁 <input type="file" accept=".json" onchange="load(event)" />
+        📁 <input type="file" accept=".world" onchange="load(event)" />
       </label>
       <button onclick="openOsmPanel()" title="OSM JSON Data">🗺️</button>
+      <button
+        id="generateBtn"
+        onclick="setEditor('generate')"
+        title="Enable World Generation"
+      >
+        ⚒️
+      </button>
       <button id="graphBtn" onclick="setEditor('graph')" title="Enable Map Editor">
         🌐
       </button>
@@ -42,13 +50,15 @@
       >
         🅿️
       </button>
-      <button id="lightBtn" onclick="setEditor('light')" title="Enable Light Editor">
+      <button id="lightBtn" onclick="setEditor('light')" title="Enable Traffic Editor">
         🚦
       </button>
       <button id="startBtn" onclick="setEditor('start')" title="Enable Start Editor">
         🚗
       </button>
-      <button id="targetBtn" onclick="setEditor('target')">🎯</button>
+      <button id="targetBtn" onclick="setEditor('target')" title="Enable Target Editor">
+        🎯
+      </button>
 
       <div id="osmPanel">
         <div>
@@ -62,6 +72,43 @@
             <button onclick="parseOsmData()">✔️</button>
             <button onclick="closeOsmPanel()">❌</button>
           </div>
+        </div>
+      </div>
+      <div id="infoPanel">
+        <div>
+          <button onclick="toggleInfo()">❌</button>
+          <ul>
+            <li>🧹 - Clear the canvas</li>
+            <li>🗑️ - Clear LocalStorage Data</li>
+            <li>💾 - Save Generated World Data in LocalStorage</li>
+            <li>🗃️ - Save Generated World Data in a JSON file</li>
+            <li>📁 - Load World Data from a JSON file</li>
+            <li>
+              🗺️ - Open a Textarea to paste Map JSON data. Goto
+              <a target="_blank" href="https://overpass-turbo.eu/">
+                https://overpass-turbo.eu/</a
+              >
+              then zoom into an area you want copy and try to zoom as much as possible as
+              you would want to select a small area else the generated map will be very
+              large. After zooming in paste
+              <span onclick="copyToClipboard()">copy to clipboard</span> this in the
+              editor and run and then toggle the Data view copy and paste it in the
+              textarea.
+            </li>
+            <li>
+              ⚒️ - Toggle World Generation as when the world is big and you are editing
+              and
+            </li>
+            <li>generating it will slow down the whole process</li>
+            <li>🌐 - Enable the Point editor to add and connect point to make road</li>
+            <li>🛑 - Enable Stop editor to add Stop marking</li>
+            <li>⚠️ - Enable Yield editor to add Yield marking</li>
+            <li>🚸 - Enable Crossing editor to add Crossing marking</li>
+            <li>🅿️ - Enable Parking editor to add Parking marking</li>
+            <li>🚦 - Enable Traffic editor to add Traffic marking</li>
+            <li>🚗 - Enable Start editor to add ai Start position marking</li>
+            <li>🎯 - Enable Target editor to add Target marking</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -94,6 +141,7 @@
     <script src="js/primitives/segment.js"></script>
     <script src="js/primitives/polygon.js"></script>
     <script src="js/primitives/envelope.js"></script>
+    <script src="js/lz-string.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
