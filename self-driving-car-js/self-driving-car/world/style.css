@@ -1,6 +1,7 @@
 body {
   background-color: black;
   text-align: center;
+  overflow-x: hidden;
 }
 
 h2 {
@@ -42,4 +43,21 @@ button {
 button:hover {
   transition: all 0.3s ease;
   box-shadow: rgba(111, 76, 255, 0.5) 0px 0px 20px 0px;
+}
+
+#osmPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 105vh;
+  display: none;
+}
+
+#osmPanel > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

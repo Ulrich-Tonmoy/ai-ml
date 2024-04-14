@@ -49,7 +49,9 @@ class Viewport {
 
   #handleMouseDown(e) {
     if (e.button === 1) {
-      document.getElementById("carCanvas").style.cursor = "grabbing";
+      const canvas =
+        document.getElementById("carCanvas") ?? document.getElementById("canvas");
+      canvas.style.cursor = "grabbing";
       this.drag.start = this.getMouse(e);
       this.drag.active = true;
     }
@@ -64,7 +66,9 @@ class Viewport {
 
   #handleMouseUp(e) {
     if (this.drag.active) {
-      document.getElementById("carCanvas").style.cursor = "default";
+      const canvas =
+        document.getElementById("carCanvas") ?? document.getElementById("canvas");
+      canvas.style.cursor = "default";
       this.offset = add(this.offset, this.drag.offset);
       this.drag = {
         start: new Point(0, 0),

@@ -252,7 +252,7 @@ class World {
     this.frameCount++;
   }
 
-  draw(ctx, viewPoint, showStartMarking = true) {
+  draw(ctx, viewPoint, showStartMarking = true, renderRadius = 1000) {
     this.#updateLights();
 
     for (const env of this.envelopes) {
@@ -280,7 +280,9 @@ class World {
       this.bestCar.draw(ctx, true);
     }
 
-    const objects = [...this.buildings, ...this.trees];
+    const objects = [...this.buildings, ...this.trees].filter(
+      (i) => i.base.distanceToPoint(viewPoint) < renderRadius,
+    );
     objects.sort(
       (a, b) => b.base.distanceToPoint(viewPoint) - a.base.distanceToPoint(viewPoint),
     );

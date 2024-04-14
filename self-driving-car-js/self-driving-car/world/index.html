@@ -18,8 +18,9 @@
       <label title="Load JSON File">
         📁 <input type="file" accept=".json" onchange="load(event)" />
       </label>
+      <button onclick="openOsmPanel()" title="OSM JSON Data">🗺️</button>
       <button id="graphBtn" onclick="setEditor('graph')" title="Enable Map Editor">
-        🗺️
+        🌐
       </button>
       <button id="stopBtn" onclick="setEditor('stop')" title="Enable Stop Editor">
         🛑
@@ -48,6 +49,21 @@
         🚗
       </button>
       <button id="targetBtn" onclick="setEditor('target')">🎯</button>
+
+      <div id="osmPanel">
+        <div>
+          <textarea
+            id="osmDataContainer"
+            cols="50"
+            rows="10"
+            placeholder="Paste OSM Data"
+          ></textarea>
+          <div>
+            <button onclick="parseOsmData()">✔️</button>
+            <button onclick="closeOsmPanel()">❌</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="js/world.js"></script>
@@ -59,7 +75,7 @@
     <script src="js/markings/light.js"></script>
     <script src="js/markings/target.js"></script>
     <script src="js/markings/yield.js"></script>
-    <script src="js/editors/viewport.js"></script>
+    <script src="js/viewport.js"></script>
     <script src="js/editors/markingEditor.js"></script>
     <script src="js/editors/graphEditor.js"></script>
     <script src="js/editors/stopEditor.js"></script>
@@ -73,6 +89,7 @@
     <script src="js/objects/building.js"></script>
     <script src="js/math/utils.js"></script>
     <script src="js/math/graph.js"></script>
+    <script src="js/math/osm.js"></script>
     <script src="js/primitives/point.js"></script>
     <script src="js/primitives/segment.js"></script>
     <script src="js/primitives/polygon.js"></script>

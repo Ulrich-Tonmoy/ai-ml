@@ -27,6 +27,7 @@ animate();
 
 function animate() {
   viewport.reset();
+  // add another variable to toggle generation
   if (graph.hash() !== oldGraphHash) {
     world.generate();
     oldGraphHash = graph.hash();
@@ -97,4 +98,25 @@ function setEditor(mode) {
 
   tools[mode].editor.enable();
   tools[mode].button.classList.remove("disabled");
+}
+
+function openOsmPanel() {
+  osmPanel.style.display = "block";
+}
+
+function closeOsmPanel() {
+  osmPanel.style.display = "none";
+}
+
+function parseOsmData() {
+  if (osmDataContainer.value === "") {
+    alert("Paste Your Data");
+    return;
+  }
+
+  const res = Osm.parseRoads(JSON.parse(osmDataContainer.value));
+  graph.points = res.points;
+  graph.segments = res.segments;
+
+  closeOsmPanel();
 }
